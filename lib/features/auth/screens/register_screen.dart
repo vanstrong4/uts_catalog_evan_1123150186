@@ -27,4 +27,39 @@ class RegisterScreen extends StatelessWidget {
 
             SizedBox(height: 20),
 
-           
+            ElevatedButton(
+              onPressed: () async {
+                await auth.signUp(
+                  emailController.text,
+                  passwordController.text,
+                );
+              },
+              child: Text("Register"),
+            ),
+
+            SizedBox(height: 20),
+
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text("Sudah punya akun? "),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.pop(context); // balik ke login
+                  },
+                  child: Text(
+                    "Login",
+                    style: TextStyle(
+                      color: Colors.blue,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
