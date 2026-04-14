@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import '../../../data/services/auth_services.dart';
+import '../../../data/services/auth_service.dart';
+import 'register_screen.dart';
 
 class LoginScreen extends StatelessWidget {
   final emailController = TextEditingController();
@@ -14,8 +15,15 @@ class LoginScreen extends StatelessWidget {
         padding: EdgeInsets.all(16),
         child: Column(
           children: [
-            TextField(controller: emailController),
-            TextField(controller: passwordController, obscureText: true),
+            TextField(
+              controller: emailController,
+              decoration: InputDecoration(labelText: "Email"),
+            ),
+            TextField(
+              controller: passwordController,
+              obscureText: true,
+              decoration: InputDecoration(labelText: "Password"),
+            ),
 
             SizedBox(height: 20),
 
@@ -34,6 +42,30 @@ class LoginScreen extends StatelessWidget {
                 await auth.signInWithGoogle();
               },
               child: Text("Login with Google"),
+            ),
+
+            SizedBox(height: 20),
+
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text("Belum punya akun? "),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (_) => RegisterScreen()),
+                    );
+                  },
+                  child: Text(
+                    "Register",
+                    style: TextStyle(
+                      color: Colors.blue,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+              ],
             ),
           ],
         ),
