@@ -29,10 +29,7 @@ class LoginScreen extends StatelessWidget {
 
               SizedBox(height: 8),
 
-              Text(
-                "Masuk ke akun kamu",
-                style: TextStyle(color: Colors.grey),
-              ),
+              Text("Masuk ke akun kamu", style: TextStyle(color: Colors.grey)),
 
               SizedBox(height: 30),
 
@@ -57,3 +54,91 @@ class LoginScreen extends StatelessWidget {
               ),
 
               SizedBox(height: 30),
+
+              SizedBox(
+                width: double.infinity,
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    padding: EdgeInsets.symmetric(vertical: 14),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                  ),
+                  onPressed: () async {
+                    String email = emailController.text.trim();
+                    String password = passwordController.text.trim();
+
+                    if (email.isEmpty || password.isEmpty) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(content: Text("Email & Password wajib diisi")),
+                      );
+                      return;
+                    }
+
+                    if (!email.contains("@")) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(content: Text("Format email tidak valid")),
+                      );
+                      return;
+                    }
+
+                    try {
+                      await auth.signIn(email, password);
+
+                      ScaffoldMessenger.of(
+                        context,
+                      ).showSnackBar(SnackBar(content: Text("Login berhasil")));
+                    } catch (e) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(content: Text("Email atau password salah")),
+                      );
+                    }
+                  },
+                  child: Text("Login"),
+                ),
+              ),
+
+              SizedBox(height: 10),
+
+              TextButton(
+                onPressed: () async {
+                  try {
+                    await auth.signInWithGoogle();
+                  } catch (e) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text("Login Google gagal")),
+                    );
+                  }
+                },
+                child: Text("Login with Google"),
+              ),
+
+              Spacer(),
+
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text("Belum punya akun? "),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (_) => RegisterScreen()),
+                      );
+                    },
+                    child: Text(
+                      "Daftar",
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                ],
+              ),
+
+              SizedBox(height: 20),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
