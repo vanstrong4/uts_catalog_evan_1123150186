@@ -8,7 +8,6 @@ class LoginScreen extends StatelessWidget {
   final auth = AuthService();
 
   @override
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
@@ -30,12 +29,16 @@ class LoginScreen extends StatelessWidget {
 
               SizedBox(height: 8),
 
-              Text("Masuk ke akun kamu", style: TextStyle(color: Colors.grey)),
+              Text(
+                "Masuk ke akun kamu",
+                style: TextStyle(color: Colors.grey),
+              ),
 
               SizedBox(height: 30),
 
               TextField(
                 controller: emailController,
+                keyboardType: TextInputType.emailAddress,
                 decoration: InputDecoration(
                   hintText: "Email",
                   border: UnderlineInputBorder(),
@@ -54,61 +57,3 @@ class LoginScreen extends StatelessWidget {
               ),
 
               SizedBox(height: 30),
-
-              SizedBox(
-                width: double.infinity,
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    padding: EdgeInsets.symmetric(vertical: 14),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                  ),
-                  onPressed: () async {
-                    await auth.signIn(
-                      emailController.text,
-                      passwordController.text,
-                    );
-                  },
-                  child: Text("Login"),
-                ),
-              ),
-
-              SizedBox(height: 10),
-
-              TextButton(
-                onPressed: () async {
-                  await auth.signInWithGoogle();
-                },
-                child: Text("Login with Google"),
-              ),
-
-              Spacer(),
-
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text("Belum punya akun? "),
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (_) => RegisterScreen()),
-                      );
-                    },
-                    child: Text(
-                      "Daftar",
-                      style: TextStyle(fontWeight: FontWeight.bold),
-                    ),
-                  ),
-                ],
-              ),
-
-              SizedBox(height: 20),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-}
