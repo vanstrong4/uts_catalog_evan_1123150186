@@ -18,7 +18,7 @@ class RegisterScreen extends StatelessWidget {
             children: [
               SizedBox(height: 40),
 
-              Center(child: Image.asset("assets/logo.png", height: 70)),
+              Center(child: Image.asset("images/ecs.png", height: 70)),
 
               SizedBox(height: 40),
 
