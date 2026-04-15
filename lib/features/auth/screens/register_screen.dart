@@ -31,3 +31,83 @@ class RegisterScreen extends StatelessWidget {
                 ),
 
                 SizedBox(height: 20),
+
+                Card(
+                  elevation: 5,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(15),
+                  ),
+                  child: Padding(
+                    padding: EdgeInsets.all(20),
+                    child: Column(
+                      children: [
+                        TextField(
+                          controller: emailController,
+                          decoration: InputDecoration(
+                            labelText: "Email",
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                          ),
+                        ),
+
+                        SizedBox(height: 15),
+
+                        TextField(
+                          controller: passwordController,
+                          obscureText: true,
+                          decoration: InputDecoration(
+                            labelText: "Password",
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                          ),
+                        ),
+
+                        SizedBox(height: 20),
+
+                        SizedBox(
+                          width: double.infinity,
+                          child: ElevatedButton(
+                            onPressed: () async {
+                              await auth.signUp(
+                                emailController.text,
+                                passwordController.text,
+                              );
+                            },
+                            child: Text("Register"),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+
+                SizedBox(height: 20),
+
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text("Sudah punya akun? "),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.pop(context);
+                      },
+                      child: Text(
+                        "Login",
+                        style: TextStyle(
+                          color: Colors.blue,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
