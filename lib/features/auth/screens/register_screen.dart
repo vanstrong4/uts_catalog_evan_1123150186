@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import '../../../data/services/auth_service.dart';
-import 'login_screen.dart';
 
 class RegisterScreen extends StatelessWidget {
   final emailController = TextEditingController();
@@ -10,56 +9,25 @@ class RegisterScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Register")),
-      body: Padding(
-        padding: EdgeInsets.all(16),
-        child: Column(
-          children: [
-            TextField(
-              controller: emailController,
-              decoration: InputDecoration(labelText: "Email"),
-            ),
-            TextField(
-              controller: passwordController,
-              obscureText: true,
-              decoration: InputDecoration(labelText: "Password"),
-            ),
-
-            SizedBox(height: 20),
-
-            ElevatedButton(
-              onPressed: () async {
-                await auth.signUp(
-                  emailController.text,
-                  passwordController.text,
-                );
-              },
-              child: Text("Register"),
-            ),
-
-            SizedBox(height: 20),
-
-            Row(
+      body: Center(
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: EdgeInsets.all(20),
+            child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text("Sudah punya akun? "),
-                GestureDetector(
-                  onTap: () {
-                    Navigator.pop(context); // balik ke login
-                  },
-                  child: Text(
-                    "Login",
-                    style: TextStyle(
-                      color: Colors.blue,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
+                // 🔹 LOGO
+                Container(
+                  height: 100,
+                  width: 100,
+                  child: Image.asset("assets/logo.png", fit: BoxFit.contain),
                 ),
-              ],
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
+
+                SizedBox(height: 20),
+
+                Text(
+                  "Create Account",
+                  style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                ),
+
+                SizedBox(height: 20),
