@@ -4,7 +4,17 @@ import 'features/auth/screens/login_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+
+  await Firebase.initializeApp(
+    options: FirebaseOptions(
+      apiKey: "AIzaSyBUK2ge8jlP6jOqrPcMFrJebSv_oBDL5A0",
+      authDomain: "evan-machine-store.firebaseapp.com",
+      projectId: "evan-machine-store",
+      storageBucket: "evan-machine-store.firebasestorage.app",
+      messagingSenderId: "SENDER_ID_KAMU",
+      appId: "1:546996661047:web:83807e710a1b8c193848b2",
+    ),
+  );
 
   runApp(MyApp());
 }
