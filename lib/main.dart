@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'features/auth/screens/login_screen.dart';
+import './features/auth/screens/splash_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -11,7 +11,7 @@ void main() async {
       authDomain: "evan-machine-store.firebaseapp.com",
       projectId: "evan-machine-store",
       storageBucket: "evan-machine-store.firebasestorage.app",
-      messagingSenderId: "SENDER_ID_KAMU",
+      messagingSenderId: "546996661047",
       appId: "1:546996661047:web:83807e710a1b8c193848b2",
     ),
   );
@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Evan Machine Store',
-      home: LoginScreen(),
+      home: SplashScreen(),
     );
   }
 }
