@@ -127,5 +127,21 @@ class LoginScreen extends StatelessWidget {
                                 return;
                               }
 
-             
+                              if (!email.contains("@")) {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                    content:
+                                        Text("Format email tidak valid"),
+                                  ),
+                                );
+                                return;
+                              }
+
+                              try {
+                                await auth.signIn(email, password);
+
+        ),
+      ),
+    );
+  }
 }
