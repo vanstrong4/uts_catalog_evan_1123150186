@@ -19,10 +19,9 @@ class LoginScreen extends StatelessWidget {
             children: [
               SizedBox(height: 40),
 
-              // Logo kecil saja (tidak terlalu mencolok)
-              Center(child: Image.asset("images/ecs.png", height: 70)),
+              Center(child: Image.asset("images/ecs.png", height: 180)),
 
-              SizedBox(height: 40),
+              SizedBox(height: 20),
 
               Text(
                 "Login",

@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import '../../../data/services/auth_service.dart';
 
 class RegisterScreen extends StatelessWidget {
+  final nameController = TextEditingController();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
+  final confirmPasswordController = TextEditingController();
+
   final auth = AuthService();
 
-  @override
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -18,9 +20,11 @@ class RegisterScreen extends StatelessWidget {
             children: [
               SizedBox(height: 40),
 
-              Center(child: Image.asset("images/ecs.png", height: 70)),
+              Center(
+                child: Image.asset("images/ecs.png", height: 180),
+              ),
 
-              SizedBox(height: 40),
+              SizedBox(height: 20),
 
               Text(
                 "Register",
@@ -29,12 +33,28 @@ class RegisterScreen extends StatelessWidget {
 
               SizedBox(height: 8),
 
-              Text("Buat akun baru", style: TextStyle(color: Colors.grey)),
+              Text(
+                "Buat akun baru",
+                style: TextStyle(color: Colors.grey),
+              ),
 
               SizedBox(height: 30),
 
+           
+              TextField(
+                controller: nameController,
+                decoration: InputDecoration(
+                  hintText: "Nama",
+                  border: UnderlineInputBorder(),
+                ),
+              ),
+
+              SizedBox(height: 20),
+
+            
               TextField(
                 controller: emailController,
+                keyboardType: TextInputType.emailAddress,
                 decoration: InputDecoration(
                   hintText: "Email",
                   border: UnderlineInputBorder(),
@@ -43,6 +63,7 @@ class RegisterScreen extends StatelessWidget {
 
               SizedBox(height: 20),
 
+          
               TextField(
                 controller: passwordController,
                 obscureText: true,
@@ -52,53 +73,16 @@ class RegisterScreen extends StatelessWidget {
                 ),
               ),
 
-              SizedBox(height: 30),
+              SizedBox(height: 20),
 
-              SizedBox(
-                width: double.infinity,
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    padding: EdgeInsets.symmetric(vertical: 14),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                  ),
-                  onPressed: () async {
-                    await auth.signUp(
-                      emailController.text,
-                      passwordController.text,
-                    );
-
-                    // balik ke login setelah berhasil
-                    Navigator.pop(context);
-                  },
-                  child: Text("Daftar"),
+            
+              TextField(
+                controller: confirmPasswordController,
+                obscureText: true,
+                decoration: InputDecoration(
+                  hintText: "Konfirmasi Password",
+                  border: UnderlineInputBorder(),
                 ),
               ),
 
-              Spacer(),
-
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text("Sudah punya akun? "),
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.pop(context);
-                    },
-                    child: Text(
-                      "Login",
-                      style: TextStyle(fontWeight: FontWeight.bold),
-                    ),
-                  ),
-                ],
-              ),
-
-              SizedBox(height: 20),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-}
+              SizedBox(height: 30),
