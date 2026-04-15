@@ -20,9 +20,7 @@ class RegisterScreen extends StatelessWidget {
             children: [
               SizedBox(height: 40),
 
-              Center(
-                child: Image.asset("images/ecs.png", height: 180),
-              ),
+              Center(child: Image.asset("images/ecs.png", height: 180)),
 
               SizedBox(height: 20),
 
@@ -33,14 +31,10 @@ class RegisterScreen extends StatelessWidget {
 
               SizedBox(height: 8),
 
-              Text(
-                "Buat akun baru",
-                style: TextStyle(color: Colors.grey),
-              ),
+              Text("Buat akun baru", style: TextStyle(color: Colors.grey)),
 
               SizedBox(height: 30),
 
-           
               TextField(
                 controller: nameController,
                 decoration: InputDecoration(
@@ -51,7 +45,6 @@ class RegisterScreen extends StatelessWidget {
 
               SizedBox(height: 20),
 
-            
               TextField(
                 controller: emailController,
                 keyboardType: TextInputType.emailAddress,
@@ -63,7 +56,6 @@ class RegisterScreen extends StatelessWidget {
 
               SizedBox(height: 20),
 
-          
               TextField(
                 controller: passwordController,
                 obscureText: true,
@@ -75,7 +67,6 @@ class RegisterScreen extends StatelessWidget {
 
               SizedBox(height: 20),
 
-            
               TextField(
                 controller: confirmPasswordController,
                 obscureText: true,
@@ -86,3 +77,81 @@ class RegisterScreen extends StatelessWidget {
               ),
 
               SizedBox(height: 30),
+
+              SizedBox(
+                width: double.infinity,
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    padding: EdgeInsets.symmetric(vertical: 14),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                  ),
+                  onPressed: () async {
+                    String name = nameController.text.trim();
+                    String email = emailController.text.trim();
+                    String password = passwordController.text.trim();
+                    String confirmPassword = confirmPasswordController.text
+                        .trim();
+
+                    if (name.isEmpty ||
+                        email.isEmpty ||
+                        password.isEmpty ||
+                        confirmPassword.isEmpty) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(content: Text("Semua field harus diisi")),
+                      );
+                      return;
+                    }
+
+                    if (password != confirmPassword) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(content: Text("Password tidak sama")),
+                      );
+                      return;
+                    }
+
+                    try {
+                      await auth.signUp(email, password);
+
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(content: Text("Register berhasil")),
+                      );
+
+                      Navigator.pop(context);
+                    } catch (e) {
+                      ScaffoldMessenger.of(
+                        context,
+                      ).showSnackBar(SnackBar(content: Text("Register gagal")));
+                    }
+                  },
+                  child: Text("Daftar"),
+                ),
+              ),
+
+              Spacer(),
+
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text("Sudah punya akun? "),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
+                    child: Text(
+                      "Login",
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                ],
+              ),
+
+              SizedBox(height: 20),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
