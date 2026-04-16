@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../../data/services/auth_service.dart';
+import '../../catalog/screens/home_screen.dart';
 import 'register_screen.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -130,7 +131,12 @@ class LoginScreen extends StatelessWidget {
 
                               try {
                                 await auth.signIn(email, password);
-
+                                Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (_) => HomeScreen(),
+                                  ),
+                                );
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   SnackBar(content: Text("Login berhasil")),
                                 );
