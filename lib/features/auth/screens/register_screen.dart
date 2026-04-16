@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../../data/services/auth_service.dart';
+import '../../catalog/screens/home_screen.dart';
 
 class RegisterScreen extends StatelessWidget {
   final nameController = TextEditingController();
@@ -176,7 +177,12 @@ class RegisterScreen extends StatelessWidget {
 
                               try {
                                 await auth.signUp(email, password);
-
+                                Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (_) => HomeScreen(),
+                                  ),
+                                );
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   SnackBar(content: Text("Register berhasil")),
                                 );
