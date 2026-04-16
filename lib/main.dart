@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Evan Machine Store',
+      title: 'Evan Coding Store',
       home: SplashScreen(),
     );
   }
