@@ -16,12 +16,11 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   void checkLogin() async {
-    await Future.delayed(Duration(seconds: 2)); // efek splash
+    await Future.delayed(Duration(seconds: 2));
 
     final user = FirebaseAuth.instance.currentUser;
 
     if (user != null) {
-      // 👉 sudah login (sementara ke halaman kosong dulu)
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (_) => HomeScreen()),
@@ -36,12 +35,22 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   @override
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: Text(
-          "Evan Machine Store",
-          style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image.asset("images/ecs.png", height: 120),
+            SizedBox(height: 20),
+            Text(
+              "Evan Machine Store",
+              style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+            ),
+            SizedBox(height: 20),
+            CircularProgressIndicator(),
+          ],
         ),
       ),
     );
