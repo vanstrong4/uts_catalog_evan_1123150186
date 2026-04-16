@@ -47,5 +47,93 @@ class RegisterScreen extends StatelessWidget {
                           ),
                         ),
 
+                        SizedBox(height: 8),
+
+                        Text(
+                          "Buat akun baru",
+                          style: TextStyle(color: Colors.lightBlue),
+                        ),
+
+                        SizedBox(height: 30),
+
+                        TextField(
+                          controller: nameController,
+                          style: TextStyle(color: Colors.lightBlue),
+                          decoration: InputDecoration(
+                            hintText: "Nama",
+                            hintStyle: TextStyle(
+                              color: Colors.lightBlue.shade200,
+                            ),
+                            enabledBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(color: Colors.lightBlue),
+                            ),
+                            focusedBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(color: Colors.lightBlue),
+                            ),
+                          ),
+                        ),
+
+                        SizedBox(height: 20),
+
+                        TextField(
+                          controller: emailController,
+                          keyboardType: TextInputType.emailAddress,
+                          style: TextStyle(color: Colors.lightBlue),
+                          decoration: InputDecoration(
+                            hintText: "Email",
+                            hintStyle: TextStyle(
+                              color: Colors.lightBlue.shade200,
+                            ),
+                            enabledBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(color: Colors.lightBlue),
+                            ),
+                            focusedBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(color: Colors.lightBlue),
+                            ),
+                          ),
+                        ),
+
+                        SizedBox(height: 20),
+
+                        TextField(
+                          controller: passwordController,
+                          obscureText: true,
+                          style: TextStyle(color: Colors.lightBlue),
+                          decoration: InputDecoration(
+                            hintText: "Password",
+                            hintStyle: TextStyle(
+                              color: Colors.lightBlue.shade200,
+                            ),
+                            enabledBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(color: Colors.lightBlue),
+                            ),
+                            focusedBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(color: Colors.lightBlue),
+                            ),
+                          ),
+                        ),
+
+                        SizedBox(height: 20),
+
+                        TextField(
+                          controller: confirmPasswordController,
+                          obscureText: true,
+                          style: TextStyle(color: Colors.lightBlue),
+                          decoration: InputDecoration(
+                            hintText: "Konfirmasi Password",
+                            hintStyle: TextStyle(
+                              color: Colors.lightBlue.shade200,
+                            ),
+                            enabledBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(color: Colors.lightBlue),
+                            ),
+                            focusedBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(color: Colors.lightBlue),
+                            ),
+                          ),
+                        ),
+
+                        SizedBox(height: 30),
+
          
 }
