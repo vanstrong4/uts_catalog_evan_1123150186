@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import '../../catalog/screens/home_screen.dart';
 import 'login_screen.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -23,7 +24,7 @@ class _SplashScreenState extends State<SplashScreen> {
       // 👉 sudah login (sementara ke halaman kosong dulu)
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (_) => Placeholder()),
+        MaterialPageRoute(builder: (_) => HomeScreen()),
       );
     } else {
       // 👉 belum login
