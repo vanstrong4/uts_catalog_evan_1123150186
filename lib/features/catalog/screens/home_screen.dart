@@ -22,4 +22,28 @@ class HomeScreen extends StatelessWidget {
             return Center(child: Text("Barang kosong"));
           }
 
-        
+          return ListView.builder(
+            itemCount: products.length,
+            itemBuilder: (context, index) {
+              final product = products[index];
+
+              return Card(
+                margin: EdgeInsets.all(10),
+                child: ListTile(
+                  leading: Image.network(
+                    product.image,
+                    width: 50,
+                    errorBuilder: (_, __, ___) => Icon(Icons.image),
+                  ),
+                  title: Text(product.name),
+                  subtitle: Text(product.description),
+                  trailing: Text("Rp ${product.price}"),
+                ),
+              );
+            },
+          );
+        },
+      ),
+    );
+  }
+}
