@@ -115,7 +115,7 @@ class HomeScreen extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(
-                                  "Rp ${product.price}",
+                                  "Rp. ${product.price}",
                                   style: TextStyle(
                                     color: primaryBlue,
                                     fontWeight: FontWeight.bold,
