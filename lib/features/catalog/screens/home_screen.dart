@@ -18,7 +18,11 @@ class HomeScreen extends StatelessWidget {
         centerTitle: true,
         title: Text(
           "Catalog",
-          style: TextStyle(fontWeight: FontWeight.bold, letterSpacing: 1),
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            letterSpacing: 1,
+            color: Colors.white,
+          ),
         ),
       ),
       body: StreamBuilder<List<Product>>(
