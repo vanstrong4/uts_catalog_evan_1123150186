@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../../../presentation/cart/screens/checkout_screen.dart';
 import '../../../data/providers/cart_provider.dart';
 
 class CartScreen extends StatelessWidget {
@@ -44,8 +45,16 @@ class CartScreen extends StatelessWidget {
                 SizedBox(height: 10),
                 ElevatedButton(
                   onPressed: () {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text("Checkout berhasil")),
+                    if (cart.items.isEmpty) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(content: Text("Keranjang masih kosong")),
+                      );
+                      return;
+                    }
+
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (_) => CheckoutScreen()),
                     );
                   },
                   child: Text("Checkout"),
