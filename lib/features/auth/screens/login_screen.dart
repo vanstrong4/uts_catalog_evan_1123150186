@@ -115,7 +115,11 @@ class LoginScreen extends StatelessWidget {
                             } catch (e) {
                               ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(
-                                  content: Text("Email atau password salah"),
+                                  content: Text(
+                                    e.toString().contains("verifikasi")
+                                        ? "Email belum diverifikasi, cek inbox kamu"
+                                        : "Email atau password salah",
+                                  ),
                                 ),
                               );
                             }

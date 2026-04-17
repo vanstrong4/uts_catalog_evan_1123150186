@@ -4,20 +4,23 @@ import 'package:google_sign_in/google_sign_in.dart';
 class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
-  Future<User?> signUp(String email, String password) async {
-    final result = await _auth.createUserWithEmailAndPassword(
-      email: email,
-      password: password,
-    );
-    return result.user;
+  Future<void> signUp(String email, String password) async {
+    final userCredential = await FirebaseAuth.instance
+        .createUserWithEmailAndPassword(email: email, password: password);
+
+    await userCredential.user!.sendEmailVerification();
   }
 
-  Future<User?> signIn(String email, String password) async {
-    final result = await _auth.signInWithEmailAndPassword(
-      email: email,
-      password: password,
-    );
-    return result.user;
+  Future<void> signIn(String email, String password) async {
+    final userCredential = await FirebaseAuth.instance
+        .signInWithEmailAndPassword(email: email, password: password);
+
+    // 🔥 cek email verification
+    if (!userCredential.user!.emailVerified) {
+      await FirebaseAuth.instance.signOut(); // logout lagi
+
+      throw Exception("Email belum diverifikasi");
+    }
   }
 
   Future<User?> signInWithGoogle() async {
