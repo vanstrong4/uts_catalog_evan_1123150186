@@ -14,7 +14,6 @@ class CheckoutScreen extends StatelessWidget {
       ),
       body: Column(
         children: [
-       
           Expanded(
             child: ListView.builder(
               itemCount: cart.items.length,
@@ -41,14 +40,11 @@ class CheckoutScreen extends StatelessWidget {
             ),
           ),
 
-         
           Container(
             padding: EdgeInsets.all(16),
             decoration: BoxDecoration(
               color: Colors.white,
-              boxShadow: [
-                BoxShadow(color: Colors.black12, blurRadius: 5),
-              ],
+              boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 5)],
             ),
             child: Column(
               children: [
@@ -57,8 +53,10 @@ class CheckoutScreen extends StatelessWidget {
                   children: [
                     Text(
                       "Total",
-                      style:
-                          TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                     Text(
                       "Rp ${cart.totalPrice}",
@@ -72,7 +70,6 @@ class CheckoutScreen extends StatelessWidget {
                 ),
                 SizedBox(height: 12),
 
-             
                 SizedBox(
                   width: double.infinity,
                   child: ElevatedButton(
@@ -80,4 +77,32 @@ class CheckoutScreen extends StatelessWidget {
                       backgroundColor: Color(0xFF1565C0),
                       padding: EdgeInsets.symmetric(vertical: 14),
                     ),
-             
+                    onPressed: () {
+                      showDialog(
+                        context: context,
+                        builder: (_) => AlertDialog(
+                          title: Text("Sukses 🎉"),
+                          content: Text("Checkout berhasil!"),
+                          actions: [
+                            TextButton(
+                              onPressed: () {
+                                Navigator.pop(context); // close dialog
+                                Navigator.pop(context); // balik ke cart
+                              },
+                              child: Text("OK"),
+                            ),
+                          ],
+                        ),
+                      );
+                    },
+                    child: Text("Checkout"),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
