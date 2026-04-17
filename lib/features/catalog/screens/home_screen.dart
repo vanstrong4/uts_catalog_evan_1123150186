@@ -3,6 +3,7 @@ import '../../../data/services/product_service.dart';
 import '../../auth/widgets/product_card.dart';
 import '../../auth/widgets/custom_appbar.dart';
 import '../../../data/models/product_model.dart';
+import '../../auth/screens/cart_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   final ProductService service = ProductService();
@@ -15,7 +16,20 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: lightBlue,
 
-      appBar: CustomAppBar(title: "Catalog"),
+      appBar: CustomAppBar(
+        title: "Catalog",
+        actions: [
+          IconButton(
+            icon: Icon(Icons.shopping_cart),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (_) => CartScreen()),
+              );
+            },
+          ),
+        ],
+      ),
 
       body: StreamBuilder<List<Product>>(
         stream: service.getProducts(),
@@ -40,7 +54,6 @@ class HomeScreen extends StatelessWidget {
             itemCount: products.length,
             itemBuilder: (context, index) {
               final product = products[index];
-
               return ProductCard(product: product);
             },
           );
