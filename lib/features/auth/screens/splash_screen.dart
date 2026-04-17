@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import '../../catalog/screens/home_screen.dart';
 import '../../../data/services/notification_service.dart';
-
 import 'login_screen.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -10,13 +9,14 @@ class SplashScreen extends StatefulWidget {
   _SplashScreenState createState() => _SplashScreenState();
 }
 
-final notificationService = NotificationService();
-
 class _SplashScreenState extends State<SplashScreen> {
+  final NotificationService notificationService = NotificationService();
+
   @override
   void initState() {
     super.initState();
-    notificationService.init(); // 🔥 ini penting
+
+    notificationService.init();
 
     checkLogin();
   }
@@ -26,13 +26,14 @@ class _SplashScreenState extends State<SplashScreen> {
 
     final user = FirebaseAuth.instance.currentUser;
 
+    if (!mounted) return;
+
     if (user != null) {
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (_) => HomeScreen()),
       );
     } else {
-      // 👉 belum login
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (_) => LoginScreen()),
@@ -40,7 +41,6 @@ class _SplashScreenState extends State<SplashScreen> {
     }
   }
 
-  @override
   @override
   Widget build(BuildContext context) {
     return Scaffold(
