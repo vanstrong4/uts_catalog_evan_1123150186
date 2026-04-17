@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import '../../../data/models/product_model.dart';
+import 'package:provider/provider.dart';
+import '../../../data/providers/cart_provider.dart';
+import '../../../data/models/cart_item.dart';
 
 class ProductCard extends StatelessWidget {
   final Product product;
@@ -25,6 +28,7 @@ class ProductCard extends StatelessWidget {
       ),
       child: Row(
         children: [
+          // IMAGE
           ClipRRect(
             borderRadius: BorderRadius.horizontal(left: Radius.circular(18)),
             child: Image.network(
@@ -41,6 +45,7 @@ class ProductCard extends StatelessWidget {
             ),
           ),
 
+          // CONTENT
           Expanded(
             child: Padding(
               padding: EdgeInsets.all(12),
@@ -70,19 +75,42 @@ class ProductCard extends StatelessWidget {
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      Container(
-                        padding: EdgeInsets.symmetric(
-                          horizontal: 10,
-                          vertical: 6,
-                        ),
-                        decoration: BoxDecoration(
-                          color: primaryBlue,
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                        child: Icon(
-                          Icons.shopping_cart,
-                          size: 16,
-                          color: Colors.white,
+
+                      // 🔥 INI YANG DIPERBAIKI
+                      GestureDetector(
+                        onTap: () {
+                          final cart = Provider.of<CartProvider>(
+                            context,
+                            listen: false,
+                          );
+
+                          cart.addItem(
+                            CartItem(
+                              name: product.name,
+                              price: product.price,
+                              image: product.image,
+                              description: product.description,
+                            ),
+                          );
+
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(content: Text("Ditambahkan ke keranjang")),
+                          );
+                        },
+                        child: Container(
+                          padding: EdgeInsets.symmetric(
+                            horizontal: 10,
+                            vertical: 6,
+                          ),
+                          decoration: BoxDecoration(
+                            color: primaryBlue,
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          child: Icon(
+                            Icons.shopping_cart,
+                            size: 16,
+                            color: Colors.white,
+                          ),
                         ),
                       ),
                     ],
