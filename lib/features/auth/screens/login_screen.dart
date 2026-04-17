@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import '../../../data/services/auth_service.dart';
 import '../../catalog/screens/home_screen.dart';
+import '../../../widgets/custom_textfield.dart';
+import '../../../widgets/custom_button.dart';
 import 'register_screen.dart';
 
 class LoginScreen extends StatelessWidget {
