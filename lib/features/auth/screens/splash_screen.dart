@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import '../../catalog/screens/home_screen.dart';
+import '../../../data/services/notification_service.dart';
+
 import 'login_screen.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -8,10 +10,14 @@ class SplashScreen extends StatefulWidget {
   _SplashScreenState createState() => _SplashScreenState();
 }
 
+final notificationService = NotificationService();
+
 class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
+    notificationService.init(); // 🔥 ini penting
+
     checkLogin();
   }
 
