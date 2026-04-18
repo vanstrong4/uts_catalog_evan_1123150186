@@ -81,7 +81,7 @@ class CheckoutScreen extends StatelessWidget {
                       showDialog(
                         context: context,
                         builder: (_) => AlertDialog(
-                          title: Text("Sukses 🎉"),
+                          title: Text("Sukses"),
                           content: Text("Checkout berhasil!"),
                           actions: [
                             TextButton(
