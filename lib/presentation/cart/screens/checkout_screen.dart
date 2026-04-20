@@ -9,42 +9,56 @@ class CheckoutScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text("Checkout"),
+        title: Text(
+          "Checkout",
+          style: TextStyle(color: Colors.white), 
+        ),
         backgroundColor: Color(0xFF1565C0),
+        iconTheme: IconThemeData(color: Colors.white), 
       ),
+
       body: Column(
         children: [
+        
           Expanded(
-            child: ListView.builder(
-              itemCount: cart.items.length,
-              itemBuilder: (context, index) {
-                final item = cart.items[index];
+            child: cart.items.isEmpty
+                ? Center(child: Text("Tidak ada item"))
+                : ListView.builder(
+                    itemCount: cart.items.length,
+                    itemBuilder: (context, index) {
+                      final item = cart.items[index];
 
-                return ListTile(
-                  leading: Image.network(item.image, width: 50),
-                  title: Text(item.name),
-                  subtitle: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text("Rp ${item.price}"),
-                      Text(
-                        item.description,
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                        style: TextStyle(fontSize: 12, color: Colors.grey),
-                      ),
-                    ],
+                      return ListTile(
+                        leading: Image.network(item.image, width: 50),
+                        title: Text(item.name),
+                        subtitle: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text("Rp ${item.price}"),
+                            Text(
+                              item.description,
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              style: TextStyle(
+                                fontSize: 12,
+                                color: Colors.grey,
+                              ),
+                            ),
+                          ],
+                        ),
+                      );
+                    },
                   ),
-                );
-              },
-            ),
           ),
 
+          
           Container(
             padding: EdgeInsets.all(16),
             decoration: BoxDecoration(
               color: Colors.white,
-              boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 5)],
+              boxShadow: [
+                BoxShadow(color: Colors.black12, blurRadius: 5),
+              ],
             ),
             child: Column(
               children: [
@@ -76,33 +90,4 @@ class CheckoutScreen extends StatelessWidget {
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Color(0xFF1565C0),
                       padding: EdgeInsets.symmetric(vertical: 14),
-                    ),
-                    onPressed: () {
-                      showDialog(
-                        context: context,
-                        builder: (_) => AlertDialog(
-                          title: Text("Sukses"),
-                          content: Text("Checkout berhasil!"),
-                          actions: [
-                            TextButton(
-                              onPressed: () {
-                                Navigator.pop(context); // close dialog
-                                Navigator.pop(context); // balik ke cart
-                              },
-                              child: Text("OK"),
-                            ),
-                          ],
-                        ),
-                      );
-                    },
-                    child: Text("Checkout"),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
+              
