@@ -9,17 +9,13 @@ class CheckoutScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          "Checkout",
-          style: TextStyle(color: Colors.white), 
-        ),
+        title: Text("Checkout", style: TextStyle(color: Colors.white)),
         backgroundColor: Color(0xFF1565C0),
-        iconTheme: IconThemeData(color: Colors.white), 
+        iconTheme: IconThemeData(color: Colors.white),
       ),
 
       body: Column(
         children: [
-        
           Expanded(
             child: cart.items.isEmpty
                 ? Center(child: Text("Tidak ada item"))
@@ -51,14 +47,11 @@ class CheckoutScreen extends StatelessWidget {
                   ),
           ),
 
-          
           Container(
             padding: EdgeInsets.all(16),
             decoration: BoxDecoration(
               color: Colors.white,
-              boxShadow: [
-                BoxShadow(color: Colors.black12, blurRadius: 5),
-              ],
+              boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 5)],
             ),
             child: Column(
               children: [
@@ -90,4 +83,45 @@ class CheckoutScreen extends StatelessWidget {
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Color(0xFF1565C0),
                       padding: EdgeInsets.symmetric(vertical: 14),
-              
+                    ),
+                    onPressed: () {
+                      if (cart.items.isEmpty) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(content: Text("Keranjang kosong")),
+                        );
+                        return;
+                      }
+
+                      cart.clearCart();
+
+                      showDialog(
+                        context: context,
+                        builder: (_) => AlertDialog(
+                          title: Text("Sukses"),
+                          content: Text("Checkout berhasil!"),
+                          actions: [
+                            TextButton(
+                              onPressed: () {
+                                Navigator.pop(context); // close dialog
+                                Navigator.pop(context); // balik ke cart
+                              },
+                              child: Text("OK"),
+                            ),
+                          ],
+                        ),
+                      );
+                    },
+                    child: Text(
+                      "Checkout",
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
