@@ -4,6 +4,8 @@ import '../../auth/widgets/product_card.dart';
 import '../../auth/widgets/custom_appbar.dart';
 import '../../../data/models/product_model.dart';
 import '../../auth/screens/cart_screen.dart';
+import '../../../data/services/auth_service.dart';
+import '../../auth/screens/login_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   final ProductService service = ProductService();
@@ -25,6 +27,19 @@ class HomeScreen extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(builder: (_) => CartScreen()),
+              );
+            },
+          ),
+
+          IconButton(
+            icon: Icon(Icons.logout),
+            onPressed: () async {
+              await AuthService().signOut();
+
+              Navigator.pushAndRemoveUntil(
+                context,
+                MaterialPageRoute(builder: (_) => LoginScreen()),
+                (route) => false,
               );
             },
           ),
