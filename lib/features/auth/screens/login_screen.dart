@@ -6,6 +6,7 @@ import '../../auth/widgets/custom_buttons.dart';
 import 'register_screen.dart';
 
 class LoginScreen extends StatelessWidget {
+  // ambil input email & password
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final auth = AuthService();
@@ -32,13 +33,13 @@ class LoginScreen extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         SizedBox(height: 40),
-
+                        // logo evand coding store
                         Center(
                           child: Image.asset("images/ecs.png", height: 180),
                         ),
 
                         SizedBox(height: 20),
-
+                        // judul
                         Text(
                           "Login",
                           style: TextStyle(
@@ -56,14 +57,14 @@ class LoginScreen extends StatelessWidget {
                         ),
 
                         SizedBox(height: 30),
-
+                        // input email
                         CustomTextField(
                           controller: emailController,
                           hint: "Email",
                         ),
 
                         SizedBox(height: 20),
-
+                        // input password
                         CustomTextField(
                           controller: passwordController,
                           hint: "Password",
@@ -71,13 +72,13 @@ class LoginScreen extends StatelessWidget {
                         ),
 
                         SizedBox(height: 30),
-
+                        // tombol login
                         CustomButton(
                           text: "Login",
                           onPressed: () async {
                             String email = emailController.text.trim();
                             String password = passwordController.text.trim();
-
+                            // cek kalo kosong
                             if (email.isEmpty || password.isEmpty) {
                               ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(
@@ -86,7 +87,7 @@ class LoginScreen extends StatelessWidget {
                               );
                               return;
                             }
-
+                            // validasi email
                             if (!email.contains("@")) {
                               ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(
@@ -97,6 +98,7 @@ class LoginScreen extends StatelessWidget {
                             }
 
                             try {
+                              // login ke firebase dan dapetin token
                               final token = await auth.signIn(email, password);
 
                               print("ACCESS TOKEN: $token");
@@ -158,6 +160,7 @@ class LoginScreen extends StatelessWidget {
 
                         SizedBox(height: 20),
 
+                        // pindah ke register kalo belum ada akun
                         Center(
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
