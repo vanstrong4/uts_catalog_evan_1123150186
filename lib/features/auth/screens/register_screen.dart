@@ -3,6 +3,7 @@ import '../../../data/services/auth_service.dart';
 import '../../catalog/screens/home_screen.dart';
 
 class RegisterScreen extends StatelessWidget {
+  // ambil input user
   final nameController = TextEditingController();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
@@ -32,13 +33,13 @@ class RegisterScreen extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         SizedBox(height: 40),
-
+                        // logo evand coding store
                         Center(
                           child: Image.asset("images/ecs.png", height: 180),
                         ),
 
                         SizedBox(height: 20),
-
+                        // judul
                         Text(
                           "Register",
                           style: TextStyle(
@@ -56,7 +57,7 @@ class RegisterScreen extends StatelessWidget {
                         ),
 
                         SizedBox(height: 30),
-
+                        // input nama
                         TextField(
                           controller: nameController,
                           style: TextStyle(color: Colors.lightBlue),
@@ -75,7 +76,7 @@ class RegisterScreen extends StatelessWidget {
                         ),
 
                         SizedBox(height: 20),
-
+                        // input email
                         TextField(
                           controller: emailController,
                           keyboardType: TextInputType.emailAddress,
@@ -95,7 +96,7 @@ class RegisterScreen extends StatelessWidget {
                         ),
 
                         SizedBox(height: 20),
-
+                        // input password
                         TextField(
                           controller: passwordController,
                           obscureText: true,
@@ -115,7 +116,7 @@ class RegisterScreen extends StatelessWidget {
                         ),
 
                         SizedBox(height: 20),
-
+                        // konfirmasi password
                         TextField(
                           controller: confirmPasswordController,
                           obscureText: true,
@@ -135,7 +136,7 @@ class RegisterScreen extends StatelessWidget {
                         ),
 
                         SizedBox(height: 30),
-
+                        // tombol
                         SizedBox(
                           width: double.infinity,
                           child: ElevatedButton(
@@ -153,7 +154,7 @@ class RegisterScreen extends StatelessWidget {
                               String confirmPassword = confirmPasswordController
                                   .text
                                   .trim();
-
+                              // cek kalo kosong
                               if (name.isEmpty ||
                                   email.isEmpty ||
                                   password.isEmpty ||
@@ -165,7 +166,7 @@ class RegisterScreen extends StatelessWidget {
                                 );
                                 return;
                               }
-
+                              // validasi konfirmasi password apakah sama
                               if (password != confirmPassword) {
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   SnackBar(
@@ -174,7 +175,7 @@ class RegisterScreen extends StatelessWidget {
                                 );
                                 return;
                               }
-
+                              // regis ke firebase
                               try {
                                 await auth.signUp(email, password);
                                 Navigator.pushReplacement(
@@ -183,10 +184,11 @@ class RegisterScreen extends StatelessWidget {
                                     builder: (_) => HomeScreen(),
                                   ),
                                 );
+                                // notifikasi sukses
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   SnackBar(content: Text("Register berhasil")),
                                 );
-
+                                // pindah ke login
                                 Navigator.pop(context);
                               } catch (e) {
                                 ScaffoldMessenger.of(context).showSnackBar(
@@ -202,7 +204,7 @@ class RegisterScreen extends StatelessWidget {
                         ),
 
                         SizedBox(height: 20),
-
+                        // pindah ke login jika udah ada akun
                         Center(
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
