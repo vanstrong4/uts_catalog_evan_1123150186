@@ -41,7 +41,131 @@ class LoginScreen extends StatelessWidget {
 
                         Text(
                           "Login",
-                   
+                          style: TextStyle(
+                            fontSize: 26,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.lightBlue[700],
+                          ),
+                        ),
+
+                        SizedBox(height: 8),
+
+                        Text(
+                          "Masuk ke akun kamu",
+                          style: TextStyle(color: Colors.lightBlue),
+                        ),
+
+                        SizedBox(height: 30),
+
+                        CustomTextField(
+                          controller: emailController,
+                          hint: "Email",
+                        ),
+
+                        SizedBox(height: 20),
+
+                        CustomTextField(
+                          controller: passwordController,
+                          hint: "Password",
+                          obscure: true,
+                        ),
+
+                        SizedBox(height: 30),
+
+                        CustomButton(
+                          text: "Login",
+                          onPressed: () async {
+                            String email = emailController.text.trim();
+                            String password = passwordController.text.trim();
+
+                            if (email.isEmpty || password.isEmpty) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Text("Email & Password wajib diisi"),
+                                ),
+                              );
+                              return;
+                            }
+
+                            if (!email.contains("@")) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Text("Format email tidak valid"),
+                                ),
+                              );
+                              return;
+                            }
+
+                            try {
+                              final token = await auth.signIn(email, password);
+
+                              print("ACCESS TOKEN: $token");
+
+                              showDialog(
+                                context: context,
+                                builder: (_) => AlertDialog(
+                                  title: Text("Access Token"),
+                                  content: SingleChildScrollView(
+                                    child: Text(token),
+                                  ),
+                                ),
+                              );
+
+                              Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(builder: (_) => HomeScreen()),
+                              );
+                            } catch (e) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Text(
+                                    e.toString().contains("verifikasi")
+                                        ? "Email belum diverifikasi, cek inbox kamu"
+                                        : "Email atau password salah",
+                                  ),
+                                ),
+                              );
+                            }
+                          },
+                        ),
+
+                        SizedBox(height: 10),
+
+                        Center(
+                          child: TextButton(
+                            onPressed: () async {
+                              try {
+                                await auth.signInWithGoogle();
+
+                                Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (_) => HomeScreen(),
+                                  ),
+                                );
+                              } catch (e) {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(content: Text("Login Google gagal")),
+                                );
+                              }
+                            },
+                            child: Text(
+                              "Login with Google",
+                              style: TextStyle(color: Colors.lightBlue),
+                            ),
+                          ),
+                        ),
+
+                        SizedBox(height: 20),
+
+                        Center(
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text("Belum punya akun? "),
+                              GestureDetector(
+                                onTap: () {
+                                  Navigator.push(
                                     context,
                                     MaterialPageRoute(
                                       builder: (_) => RegisterScreen(),
