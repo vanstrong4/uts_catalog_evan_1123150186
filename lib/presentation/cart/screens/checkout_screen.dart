@@ -102,8 +102,8 @@ class CheckoutScreen extends StatelessWidget {
                           actions: [
                             TextButton(
                               onPressed: () {
-                                Navigator.pop(context); // close dialog
-                                Navigator.pop(context); // balik ke cart
+                                Navigator.pop(context);
+                                Navigator.pop(context);
                               },
                               child: Text("OK"),
                             ),
