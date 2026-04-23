@@ -8,7 +8,7 @@ Aplikasi marketplace sederhana berbasis Flutter dengan integrasi Firebase dan pe
 
 Link video demo:
 
-[Klik untuk menonton demo](LINK_VIDEO_KAMU_DI_SINI)
+[Klik untuk menonton demo]https://youtu.be/ZLU4itxgJ-E
 
 Video menampilkan:
 
